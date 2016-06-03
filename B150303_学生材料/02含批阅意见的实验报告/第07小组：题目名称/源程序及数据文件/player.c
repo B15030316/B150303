@@ -1,6 +1,6 @@
 #include "player.h"
-#include <stdio.h>
-int readPla(Player  *pla , int n)          /*¶ÁÈëÇòÔ±¼ÇÂ¼Öµ£¬±àºÅÎª0»ò¶ÁÂú¹æ¶¨ÌõÊı¼ÇÂ¼Ê±Í£Ö¹*/
+#include <stdio.h> 
+int readPla(Player  *pla , int n)            /*¶ÁÈëÇòÔ±¼ÇÂ¼Öµ£¬±àºÅÎª0»ò¶ÁÂú¹æ¶¨ÌõÊı¼ÇÂ¼Ê±Í£Ö¹*/
 {
 	int i,j;
 	for (i=0;i<n;i++)
@@ -104,10 +104,9 @@ void calcuTotal(Player pla[],int n)         /*¼ÆËãËùÓĞÇòÔ±µÄ×Ü·Ö*/
 	for (i=0;i<n;i++)                    /*Íâ²ãÑ­»·¿ØÖÆËùÓĞÇòÔ±¼ÇÂ¼*/
 	{
 		pla[i].total =0;
-			pla[i].total =(pla[i].ascore*pla[i].appearance);
-	}	
+			pla[i].total =((pla[i].ascore)*(pla[i].appearance));
+	}
 }
-
 void calcuRank(Player pla[],int n)          /*¸ù¾İ×Ü·Ö¼ÆËãËùÓĞÇòÔ±µÄÅÅÃû£¬³É¼¨ÏàÍ¬ÕßÃû´ÎÏàÍ¬*/
 {
 	int i ;                       
@@ -116,7 +115,7 @@ void calcuRank(Player pla[],int n)          /*¸ù¾İ×Ü·Ö¼ÆËãËùÓĞÇòÔ±µÄÅÅÃû£¬³É¼¨Ïà
 	pla[0].rank=1;                      /*µÚÒ»Ìõ¼ÇÂ¼µÄÃû´ÎÒ»¶¨ÊÇ1*/
 	for (i=1;i<n;i++)                     /*´ÓµÚ¶şÌõ¼ÇÂ¼Ò»Ö±µ½×îºóÒ»Ìõ½øĞĞÑ­»·*/
 	{
-		if (equal(pla[i],pla[i-1],11))         /*µ±Ç°¼ÇÂ¼ÓëÆäÏàÁÚµÄÇ°Ò»Ìõ¼ÇÂ¼Èç¹û×Ü·ÖÏàµÈ*/
+		if (equal(pla[i],pla[i-1],4))         /*µ±Ç°¼ÇÂ¼ÓëÆäÏàÁÚµÄÇ°Ò»Ìõ¼ÇÂ¼Èç¹û×Ü·ÖÏàµÈ*/
 			pla[i].rank=pla[i-1].rank;     /*µ±Ç°¼ÇÂ¼Ãû´ÎµÈÓÚÆäÏàÁÚµÄÇ°Ò»Ìõ¼ÇÂ¼Ãû´Î*/ 
 	    else
 			pla[i].rank=i+1;             /*²»ÏàµÈÊ±µ±Ç°¼ÇÂ¼Ãû´ÎµÈÓÚÆäÏÂ±êºÅ+1*/
@@ -142,10 +141,10 @@ void calcuMark(double m[3][2],Player pla[],int n) /*Çó³¡¾ùµÃ·ÖÀº°åÖú¹¥×î¸ß¡¢×îµÍ
 	}
 }
 
-void sortPla(Player pla[],int n,int condition)  /*Ñ¡Ôñ·¨ÅÅĞò£¬°´conditionÌõ¼şÓÉĞ¡µ½´óÅÅĞò*/
+void sortPla(Player  pla[],int n,int condition)  /*Ñ¡Ôñ·¨ÅÅĞò£¬°´conditionÌõ¼şÓÉĞ¡µ½´óÅÅĞò*/
 {
 	int i,j,minpos;                      /*minposÓÃÀ´´æ´¢±¾ÌË×îĞ¡ÔªËØËùÔÚµÄÏÂ±ê*/
-	Player t;
+	Player p;
 	for (i=0;i<n-1;i++)                  /*¿ØÖÆÑ­»·µÄn-1ÌË*/
 	{
 		minpos=i;
@@ -154,15 +153,15 @@ void sortPla(Player pla[],int n,int condition)  /*Ñ¡Ôñ·¨ÅÅĞò£¬°´conditionÌõ¼şÓÉĞ
 				minpos=j;
 		if (i!=minpos)                 /*±£Ö¤±¾ÌË×îĞ¡ÔªËØµ½´ïÏÂ±êÎªiµÄÎ»ÖÃ*/
 		{
-			t=pla[i];
+			p=pla[i];
 			pla[i]=pla[minpos];
-			pla[minpos]=t;
+			pla[minpos]=p;
 		}
 	}
 }
 
 int searchPla(Player pla[],int n,Player p,int condition,int f[ ])  /*ÔÚplaÊı×éÖĞÒÀconditionÌõ¼ş²éÕÒ*/
-/*ÓësÏàÍ¬µÄÔªËØ£¬ÓÉÓÚ²»Ö¹Ò»Ìõ¼ÇÂ¼·ûºÏÌõ¼ş£¬Òò´Ë½«ÕâĞ©ÔªËØµÄÏÂ±êÖÃÓÚ fÊı×éÖĞ*/
+/*ÓëpÏàÍ¬µÄÔªËØ£¬ÓÉÓÚ²»Ö¹Ò»Ìõ¼ÇÂ¼·ûºÏÌõ¼ş£¬Òò´Ë½«ÕâĞ©ÔªËØµÄÏÂ±êÖÃÓÚ fÊı×éÖĞ*/
 {
 	int i,j=0,find=0;
 	for (i=0;i<n;i++)                                 /*´ı²éÕÒµÄÔªËØ*/

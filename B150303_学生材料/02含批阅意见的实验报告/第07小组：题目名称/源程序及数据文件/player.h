@@ -29,7 +29,7 @@ void reverse(Player pla[],int n);             /*球员记录数组元素逆置*/
 
 void calcuTotal(Player pla[],int n);           /*计算所有球员的总分*/
 void calcuRank(Player pla[],int n);           /*根据总分计算球员的名次，允许有并列名次*/
-void calcuMark(double m[2][2],Player pla[],int n); /*求场均得分、篮板、助攻的最高、最低，m数组第一维*/
+void calcuMark(double m[3][2],Player pla[],int n); /*求场均得分、篮板、助攻的最高、最低，m数组第一维*/
 /*表示哪门课，第二维表示最高、最低*/
 
 void sortPla(Player pla[],int n,int condition);   /*选择法从小到大排序，按condition所规定的条件*/

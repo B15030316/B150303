@@ -5,7 +5,7 @@
 void printHead( )      /*打印球员信息的表头*/
 {
 	printf("=========================NBA PLAYERS' STATISTICS==========================\n");
-	printf("%4s%6s%9s%6s%6s%6s%9s%6s%6s%6s%9s%6s\n","编号","姓名","场上位置","球队","身高","体重","场均得分","篮板","助攻","抢断","出场次数","名次");
+	printf("%4s%5s%9s%6s%6s%6s%9s%6s%6s%6s%9s%6s\n","编号","姓名","场上位置","球队","身高","体重","场均得分","篮板","助攻","抢断","出场次数","名次");
 }
 void menu( )         /*顶层菜单函数*/
 {
@@ -98,11 +98,11 @@ void scoreManage(Player pla[],int n)          /*该函数完成球员数据管理功能*/
 		}
 	}while(choice);
 }
-void printMarkCourse(char *p,double m[2][2],int k)   /*打印分数通用函数，被countManage 调用*/
+void printMarkCourse(char *p,double m[3][2],int k)   /*打印分数通用函数，被countManage 调用*/
 {                 /*形式参数k代表输出不同的内容，0、1、2分别对应最高数据、最低数据*/
 int i;
     printf(p);                                  /*这里的p传入的是输出数据的提示信息*/
-   for (i=0;i<2;i++)                           /*i控制哪一项数据*/
+   for (i=0;i<3;i++)                           /*i控制哪一项数据*/
 		  printf("%10.2lf",m[i][k]);
 	   printf("\n");
 }
@@ -185,14 +185,18 @@ int runMain(Player pla[],int n,int choice)    /*主控模块，对应于一级菜单其下各功
 int main( )
 {
 		Player pla[NUM];                /*定义实参一维数组存储球员记录*/
-      int choice,n;
-	 n=readFile(pla);                  /*首先读取文件，记录条数返回赋值给n*/
+      int choice,n,pas;
+	  printf("Please input six numbers password: ");
+	  scanf("%d",&pas);
+       if (pas==123456)
+	   {
+		   n=readFile(pla);                  /*首先读取文件，记录条数返回赋值给n*/
 	 if (!n)                          /*如果原来的文件为空*/
-	     {
+			{
 		    n=createFile(pla);              /*则首先要建立文件，从键盘上读入一系列记录存于文件*/
-}	 	 
+			}	 	 
 	do
-	     {
+			{
 	         menu();                      /*显示主菜单*/
 	         printf("Please input your choice: ");
 	         scanf("%d",&choice);
@@ -200,10 +204,13 @@ int main( )
 	              n=runMain(pla,n,choice);    /*通过调用此函数进行一级功能项的选择执行*/
 	         else 
 		          printf("error input,please input your choice again!\n");
-	} while (choice);
-	sortPla(pla,n,1);                   /*存入文件前按编号由小到大排序*/ 
-	     saveFile(pla,n);                   /*将结果存入文件*/
-        return 0;
+			} while (choice);
+	         sortPla(pla,n,1);                   /*存入文件前按编号由小到大排序*/ 
+	         saveFile(pla,n);                   /*将结果存入文件*/
+		}
+          else  
+		  printf("error\n");
+		  return 0;
 }
 
 
